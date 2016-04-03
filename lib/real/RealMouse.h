@@ -18,6 +18,7 @@
 #include "Mouse.h"
 #include "AbstractMaze.h"
 #include "Pose.h"
+#include "Direction.h"
 #include "Bounce2.h"
 
 class RealMouse : public Mouse {
@@ -58,6 +59,13 @@ public:
   // \brief read IMU and inject current angle into kinematic controller
   void updateGlobalYaw();
 
+  float getRawIMUYaw();
+
+  // facing east = 0
+  float getIMUYaw();
+
+  uint8_t getIMUCalibration();
+
   void setSpeed(int forwardVelocity, float ccwVelocity);
 
   void suggestWalls(bool *walls);
@@ -66,6 +74,8 @@ public:
 
   // \brief return array of 3 distances in meters
   float *getRawDistances();
+
+  void setEastYaw(float yaw);
 
 private:
   RealMouse();
@@ -143,4 +153,6 @@ private:
   bool suggestedWalls[4];
   bool hasSuggestion;
   float rawDistances[3];
+
+  float eastYaw;
 };
