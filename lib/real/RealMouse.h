@@ -39,8 +39,8 @@ public:
   constexpr static float WALL_DIST = 0.12;
   constexpr static float MAX_SPEED = 300; //mm/s
   constexpr static float MAX_ROT_SPEED = M_PI/2; //rad/s
-  constexpr static float MIN_SPEED = 20; //mm/s
-  constexpr static float MIN_ROT_SPEED = M_PI/12; //rad/s
+  constexpr static float MIN_SPEED = 40; //mm/s
+  constexpr static float MIN_ROT_SPEED = M_PI/6; //rad/s
 
   Bounce goButton;
   Bounce aButton;

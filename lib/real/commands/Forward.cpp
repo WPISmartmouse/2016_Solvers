@@ -11,6 +11,10 @@ void Forward::initialize(){
   start = mouse->getPose();
   disp = 0.0f;
   goalYaw = toYaw(mouse->getDir());
+  mouse->clearDisplay();
+  mouse->display.setTextSize(3);
+  mouse->display.println("fwd");
+  mouse->updateDisplay();
 }
 
 float Forward::forwardDisplacement(Pose p0, Pose p1){
@@ -44,14 +48,9 @@ bool Forward::outOfRange(float range){
 void Forward::execute(){
   float currentYaw = -999;
   float dYaw = -999;
-  int imu_in_calib = (mouse->getIMUCalibration() == 3);
-  if (imu_in_calib) {
-    currentYaw = mouse->getIMUYaw();
-    mouse->updateGlobalYaw();
-    // TODO: not query imu calib inside updateGlobalYaw
-  } else {
-    currentYaw = mouse->getPose().yaw;
-  }
+
+  currentYaw = mouse->getIMUYaw();
+  mouse->updateGlobalYaw();
 
   dYaw = yawDiff(currentYaw, goalYaw);
   float angleError = -dYaw;
@@ -133,6 +132,8 @@ void Forward::execute(){
     sumCorrection = -RealMouse::MAX_ROT_SPEED;
   }
 
+  speed = speed * cos(dYaw);
+
   speed = speed > RealMouse::MAX_SPEED ? RealMouse::MAX_SPEED : speed;
   speed = speed < RealMouse::MIN_SPEED ? RealMouse::MIN_SPEED : speed;
 
@@ -149,7 +150,8 @@ bool Forward::isFinished(){
 
 void Forward::end(){
   mouse->internalForward();
-  mouse->setSpeed(0,0);
+  //mouse->setSpeed(0,0);
+  mouse->brake();
 
   walls[static_cast<int>(mouse->getDir())] = distances[1] < RealMouse::WALL_DIST;
   walls[static_cast<int>(opposite_direction(mouse->getDir()))] = false;
