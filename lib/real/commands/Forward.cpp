@@ -110,7 +110,16 @@ void Forward::execute(){
   }
 
   float correction = 0.0;
-  if (wallOnLeft) {
+
+  if (wallOnLeft && wallOnRight){
+    if (dToWallLeft < dToWallRight) {
+      correction = -leftWallError * kPWall * dispError;
+    }
+    else {
+      correction = rightWallError * kPWall * dispError;
+    }
+  }
+  else if (wallOnLeft) {
     correction = -leftWallError * kPWall * dispError;
   }
   else if (wallOnRight) {
