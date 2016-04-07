@@ -68,6 +68,11 @@ void RealMouse::run(){
 }
 
 void RealMouse::brake(){
+  // immediately stop motors instead of waiting 1 control cycle.
+  analogWrite(MOTOR1A,255);
+  analogWrite(MOTOR1B,255);
+  analogWrite(MOTOR2A,255);
+  analogWrite(MOTOR2B,255);
   kc.brake();
 }
 
