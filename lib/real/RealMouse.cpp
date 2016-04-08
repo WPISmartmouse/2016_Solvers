@@ -303,3 +303,10 @@ void RealMouse::updateDisplay() {
     display.display();
   }
 }
+
+void RealMouse::setTuningParameter(float param){
+  TUNING_PARAM = param;
+}
+float RealMouse::getTuningParameter(){
+  return TUNING_PARAM;
+}

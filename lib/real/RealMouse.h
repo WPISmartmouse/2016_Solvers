@@ -85,6 +85,9 @@ public:
   void clearDisplay();
   void updateDisplay();
 
+  void setTuningParameter(float param);
+  float getTuningParameter();
+
 private:
   RealMouse();
 
@@ -165,4 +168,6 @@ private:
   float eastYaw;
   unsigned long lastDisplayUpdate;
   const static long displayUpdateInterval = 200;
+
+  float TUNING_PARAM;
 };
