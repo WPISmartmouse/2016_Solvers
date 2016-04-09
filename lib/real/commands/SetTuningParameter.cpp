@@ -16,7 +16,7 @@ void SetTuningParameter::execute(){
     param += dP;
   }
 
-  if (mouse->bButton.fell()){
+  if (mouse->aButton.fell()){
     param -= dP;
   }
 

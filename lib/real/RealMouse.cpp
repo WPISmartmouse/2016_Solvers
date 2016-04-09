@@ -225,10 +225,10 @@ void RealMouse::setup(){
   goButton.interval(10);
 
   aButton.attach(BUTTON1);
-  aButton.interval(200);
+  aButton.interval(10);
 
   bButton.attach(BUTTON2);
-  bButton.interval(200);
+  bButton.interval(10);
 
   //Start I2C library
   Wire.begin();
